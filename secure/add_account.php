@@ -1,13 +1,11 @@
 <?php
 session_start();
 
-// Cek apakah user sudah login
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: index.html");
     exit;
 }
 
-// Cek apakah user adalah superadmin
 if(!isset($_SESSION["position"]) || $_SESSION["position"] !== "superadmin"){
     header("location: index.html");
     exit;
@@ -53,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
             $param_username = $username;
             $param_password = password_hash("123456789", PASSWORD_DEFAULT);
-            $param_position = "admin"; // Semua user baru adalah admin
+            $param_position = "admin";
 
             if(mysqli_stmt_execute($stmt)){
                 header("location: login.php");
