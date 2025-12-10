@@ -401,7 +401,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             color: #667eea;
         }
 
-        /* Dark Mode Styles */
         body.dark-mode {
             background: #1a202c;
         }
@@ -499,7 +498,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             color: #667eea;
         }
 
-        /* Responsive Design */
         @media screen and (min-width: 1025px) {
             .welcome-section {
                 display: block;
@@ -883,7 +881,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             const eyeIcon = document.getElementById('eyeIcon');
             const mainContainer = document.querySelector('.main-container');
             
-            // Background slideshow
             const backgrounds = [
                 'img/background-lgn.jpeg',
                 'img/background-lgn2.jpeg',
@@ -897,10 +894,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 mainContainer.style.backgroundImage = `url('${backgrounds[currentBgIndex]}')`;
             }
             
-            // Ganti background setiap 5 detik
             setInterval(changeBackground, 5000);
             
-            // Rotating text animation
             const rotatingTexts = document.querySelectorAll('.rotating-text p');
             let currentTextIndex = 0;
             
@@ -910,17 +905,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 rotatingTexts[currentTextIndex].classList.add('active');
             }
             
-            // Ganti teks setiap 5 detik
             setInterval(rotateText, 5000);
             
-            // Load dark mode preference from localStorage
             if (localStorage.getItem('darkMode') === 'enabled') {
                 body.classList.add('dark-mode');
                 logoImage.src = 'img/logo-trans.png';
                 logoVT.src = 'img/logo-vt-trans.png';
             }
             
-            // Toggle dark mode
             darkModeToggle.addEventListener('click', function() {
                 body.classList.toggle('dark-mode');
                 
@@ -935,12 +927,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 }
             });
 
-            // Toggle password visibility
             togglePassword.addEventListener('click', function() {
                 const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordInput.setAttribute('type', type);
                 
-                // Toggle eye icon
                 if (type === 'text') {
                     eyeIcon.classList.remove('fa-eye');
                     eyeIcon.classList.add('fa-eye-slash');
