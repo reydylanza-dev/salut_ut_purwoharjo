@@ -19,53 +19,44 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else{
         $new_password = trim($_POST["new_password"]);
         
-        // Validasi password kuat
         $is_weak = false;
         $weak_reason = "";
         
-        // Cek pola angka berurutan
         if (preg_match('/(?:012|123|234|345|456|567|678|789|890|098|987|876|765|654|543|432|321|210)/', $new_password)) {
             $is_weak = true;
             $weak_reason = "Password mengandung angka berurutan (123, 234, dst)";
         }
         
-        // Cek pola keyboard
         if (preg_match('/(?:qwerty|asdfgh|zxcvbn|qwertz|azerty)/i', $new_password)) {
             $is_weak = true;
             $weak_reason = "Password mengandung pola keyboard yang umum";
         }
         
-        // Cek angka berulang
         if (preg_match('/(\d)\1{2,}/', $new_password)) {
             $is_weak = true;
             $weak_reason = "Password mengandung angka berulang (111, 222, dst)";
         }
         
-        // Cek format tanggal
         if (preg_match('/(?:0[1-9]|[12]\d|3[01])(?:0[1-9]|1[012])(?:19|20)?\d{2}/', $new_password)) {
             $is_weak = true;
             $weak_reason = "Password tampak seperti tanggal lahir";
         }
         
-        // Cek format tahun
         if (preg_match('/(?:19[5-9]\d|20[0-2]\d)/', $new_password)) {
             $is_weak = true;
             $weak_reason = "Password mengandung format tahun yang umum";
         }
         
-        // Cek hanya angka
         if (preg_match('/^\d+$/', $new_password)) {
             $is_weak = true;
             $weak_reason = "Password hanya terdiri dari angka";
         }
         
-        // Cek hanya huruf
         if (preg_match('/^[a-zA-Z]+$/', $new_password)) {
             $is_weak = true;
             $weak_reason = "Password hanya terdiri dari huruf tanpa angka";
         }
         
-        // Cek kombinasi huruf dan angka
         $has_letter = preg_match('/[a-zA-Z]/', $new_password);
         $has_number = preg_match('/\d/', $new_password);
         if (!$has_letter || !$has_number) {
@@ -936,17 +927,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 }
             });
 
-            // Password strength meter
             if (newPasswordInput) {
                 newPasswordInput.addEventListener('input', function() {
                     const password = this.value;
                     let strength = 0;
 
-                    // Length checks
                     if (password.length >= 8) strength++;
                     if (password.length >= 12) strength++;
 
-                    // Character variety checks
                     const hasLetter = /[a-zA-Z]/.test(password);
                     const hasNumber = /\d/.test(password);
                     const hasUpperCase = /[A-Z]/.test(password);
@@ -957,7 +945,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     if (hasUpperCase && hasLowerCase) strength++;
                     if (hasSpecial) strength++;
 
-                    // Check for weak patterns
                     const weakPatterns = [
                         /(?:012|123|234|345|456|567|678|789|890|098|987|876|765|654|543|432|321|210)/,
                         /(\d)\1{2,}/,
@@ -976,7 +963,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         }
                     });
 
-                    // Update strength bar
                     strengthBar.className = 'strength-bar-fill';
                     if (strength <= 2 || hasWeakPattern) {
                         strengthBar.classList.add('strength-weak');
@@ -994,7 +980,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 });
             }
 
-            // Form validation
             if (form) {
                 form.addEventListener('submit', function(e) {
                     if (newPasswordInput.value !== confirmPasswordInput.value) {
